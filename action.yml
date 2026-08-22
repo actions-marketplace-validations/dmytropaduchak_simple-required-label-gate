@@ -1,0 +1,26 @@
+name: Simple Required Label Gate
+description: Fail when a pull request is missing required labels.
+author: Dmytro Paduchak
+branding:
+  icon: tag
+  color: orange
+inputs:
+  github-token:
+    description: Token to read PR/repo data and post sticky comments.
+    required: false
+    default: ${{ github.token }}
+  fail-on:
+    description: "none = report only; medium or high = fail when findings match."
+    required: false
+    default: none
+  required-labels:
+    description: Comma-separated labels; PR must include at least one group separated by | for AND groups use commas.
+    required: false
+    default: ""
+  mode:
+    description: "all = every label required; any = at least one required."
+    required: false
+    default: all
+runs:
+  using: node20
+  main: dist/index.js
